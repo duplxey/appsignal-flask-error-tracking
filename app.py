@@ -48,8 +48,8 @@ def detail_view(task_id):
 
 @app.route("/create", methods=["POST"])
 def create_view():
-    name = request.form.get("name", type=str)
-    description = request.form.get("description", type=str)
+    name = request.form.get("name", type=str, default="Unnamed Task")
+    description = request.form.get("description", type=str, default="")
 
     task = Task(name=name, description=description)
     db.session.add(task)
@@ -82,7 +82,11 @@ def delete_view(task_id):
 def statistics_view():
     done_tasks_count = Task.query.filter_by(is_done=True).count()
     undone_tasks_count = Task.query.filter_by(is_done=False).count()
-    done_percentage = done_tasks_count / (done_tasks_count + undone_tasks_count) * 100
+
+    if done_tasks_count + undone_tasks_count == 0:
+        done_percentage = 0
+    else:
+        done_percentage = done_tasks_count / (done_tasks_count + undone_tasks_count) * 100
 
     return jsonify({
         "done_tasks_count": done_tasks_count,
