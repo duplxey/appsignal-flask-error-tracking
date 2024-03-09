@@ -1,5 +1,11 @@
-from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+load_dotenv()
+
+from __appsignal__ import appsignal  # noqa: E402
+appsignal.start()
+
+from flask import Flask, jsonify, request  # noqa: E402
+from flask_sqlalchemy import SQLAlchemy  # noqa: E402
 
 app = Flask(__name__)
 app.secret_key = "9CB3Bphjkd99swIDHHfS1YMBHInkw1uC"
