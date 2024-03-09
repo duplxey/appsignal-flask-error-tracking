@@ -78,5 +78,18 @@ def delete_view(task_id):
     return jsonify({}), 204
 
 
+@app.route("/statistics", methods=["GET"])
+def statistics_view():
+    done_tasks_count = Task.query.filter_by(is_done=True).count()
+    undone_tasks_count = Task.query.filter_by(is_done=False).count()
+    done_percentage = done_tasks_count / (done_tasks_count + undone_tasks_count) * 100
+
+    return jsonify({
+        "done_tasks_count": done_tasks_count,
+        "undone_tasks_count": undone_tasks_count,
+        "done_percentage": done_percentage,
+    })
+
+
 if __name__ == "__main__":
     app.run()
