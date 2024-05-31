@@ -2,7 +2,7 @@
 
 This repository demonstrates how to use AppSignal to track errors in a Flask application.
 
-Read the article on [AppSignal's blog](#).
+Read the article on [AppSignal's blog](https://blog.appsignal.com/2024/05/29/track-errors-in-your-python-flask-application-with-appsignal.html).
 
 ## Development Setup
 
